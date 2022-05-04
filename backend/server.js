@@ -1,10 +1,11 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const { chats } = require('./data/data');
+const connectDB = require('./config/db');
 
-const app = express();
 dotenv.config();
-
+connectDB();
+const app = express();
 
 // some route to test
 app.get('/', (req, res) => {
