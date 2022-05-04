@@ -14,7 +14,7 @@ const Signup = () => {
     const [name, setName] = useState();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
-    const [confirmpassword, Confirmpassword] = useState();
+    const [confirmpassword, setConfirmpassword] = useState();
     const [pic, setPic] = useState();
 
     const handleClick = () => setShow(!show);
@@ -60,7 +60,7 @@ const Signup = () => {
                     <Input
                         type={show ? 'text' : 'password'}
                         placeholder="Confirm password"
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={(e) => setConfirmpassword(e.target.value)}
                     />
                     <InputRightElement width="4.5rem">
                         <Button h="1.75rem" size="sm" onClick={handleClick}>
