@@ -28,6 +28,9 @@ const MyChats = () => {
         title: 'error occured',
         description: 'failed to load the chast',
         status: 'error',
+        duration: 5000,
+        isClosable: true,
+        position: 'bottom-left',
       });
     }
   };
@@ -41,7 +44,7 @@ const MyChats = () => {
     <Box
       d={{ base: selectedChat ? 'none' : 'flex', md: 'flex' }}
       flexDir="column"
-      alignItems="cecnter"
+      alignItems="center"
       p={3}
       bg="white"
       w={{ base: '100%', md: '31%' }}
