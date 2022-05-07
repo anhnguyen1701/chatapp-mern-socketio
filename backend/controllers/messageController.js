@@ -27,9 +27,7 @@ const sendMessage = expressAsyncHandler(async (req, res) => {
       select: 'name pic email',
     });
 
-    await Chat.findByIdAndUpdate(req.body.chatId, {
-      latestMessage: message,
-    });
+    await Chat.findByIdAndUpdate(req.body.chatId, { latestMessage: message });
 
     res.json(message);
   } catch (error) {
