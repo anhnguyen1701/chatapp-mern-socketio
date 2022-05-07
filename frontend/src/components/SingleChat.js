@@ -41,8 +41,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         `/api/message/${selectedChat._id}`,
         config
       );
-
-      console.log(messages);
+      // console.log(messages);
       setMessages(data);
       setLoading(false);
     } catch (error) {
@@ -59,7 +58,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
   useEffect(() => {
     fetchMessages();
-    console.log(selectedChat);
   }, [selectedChat]);
 
   const sendMessage = async (e) => {
@@ -80,9 +78,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           },
           config
         );
-
-        console.log(data);
-
+        console.log(messages);
         setNewMessage('');
         setMessages([...messages, data]);
       } catch (error) {
