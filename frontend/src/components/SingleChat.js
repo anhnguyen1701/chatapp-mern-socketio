@@ -17,7 +17,7 @@ import axios from 'axios';
 import ScrollableChat from './ScrollableChat';
 import io from 'socket.io-client';
 
-const ENDPOINT = 'https://mern-chatapp-socketio.herokuapp.com/';
+const ENDPOINT = 'http://localhost:5000';
 let socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
