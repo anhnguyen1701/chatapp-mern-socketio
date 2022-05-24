@@ -14,6 +14,10 @@ const app = express();
 
 app.use(express.json()); // accept JSON data
 
+app.get('/', (req, res) => {
+  res.send('api is running');
+});
+
 app.use('/api/user', userRoutes);
 app.use('/api/chat', chatRoutes);
 app.use('/api/message', messageRoutes);
