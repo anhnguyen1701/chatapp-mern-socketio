@@ -1,11 +1,9 @@
 # how to run
-- cd backend 
 - npm install
-- npm run start
-- cd ..
-- cd frontend
-- npm install
-- npm run start
+- cd frontend && npm install
+
+- npm run server
+- cd frontend && npm run start
 
 
 # deploy api heroku
