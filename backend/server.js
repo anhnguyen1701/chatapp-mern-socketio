@@ -18,7 +18,7 @@ app.use(express.json()); // accept JSON data
 app.use('/api/user', userRoutes);
 app.use('/api/chat', chatRoutes);
 app.use('/api/message', messageRoutes);
-app.use('/api/post', postRoutes);
+app.use('/api/posts', postRoutes);
 
 // ----deployment----
 const __dirname1 = path.resolve();
