@@ -18,7 +18,7 @@ const Homepage = () => {
 
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem('userInfo'));
-        if (user) history.push('/chats');
+        if (user) history.push('/home');
     });
 
     return (
@@ -34,7 +34,7 @@ const Homepage = () => {
                 borderWidth="1px"
             >
                 <Text fontSize="4xl" fontFamily="Work sans">
-                    Chatapp socketio
+                    Mern Social App
                 </Text>
             </Box>
 
