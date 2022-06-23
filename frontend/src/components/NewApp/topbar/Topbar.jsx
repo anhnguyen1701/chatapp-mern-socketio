@@ -1,17 +1,18 @@
-import "./topbar.css";
-import { Search, Person, Chat, Notifications } from "@material-ui/icons";
-import { Link } from "react-router-dom";
-import { useContext } from "react";
-import { AuthContext } from "../../../Context/AuthContext";
+import './topbar.css';
+import { Search, Person, Chat, Notifications } from '@material-ui/icons';
+import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../../../Context/AuthContext';
+import { ChatState } from '../../../Context/ChatProvider';
 
 export default function Topbar() {
-  const { user } = useContext(AuthContext);
+  const { user } = ChatState();
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
-        <Link to="/" style={{ textDecoration: "none" }}>
-          <span className="logo">Lamasocial</span>
+        <Link to="/" style={{ textDecoration: 'none' }}>
+          <span className="logo">Mern Social App</span>
         </Link>
       </div>
       <div className="topbarCenter">
@@ -47,7 +48,7 @@ export default function Topbar() {
             src={
               user.profilePicture
                 ? PF + user.profilePicture
-                : PF + "person/noAvatar.png"
+                : PF + 'person/noAvatar.png'
             }
             alt=""
             className="topbarImg"
