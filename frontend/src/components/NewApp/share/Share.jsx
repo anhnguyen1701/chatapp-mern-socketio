@@ -9,10 +9,10 @@ import {
 import { useContext, useRef, useState } from "react";
 import { AuthContext } from "../../../Context/AuthContext";
 import axios from "axios";
+import { ChatState } from "../../../Context/ChatProvider";
 
 export default function Share() {
-  const { user } = useContext(AuthContext);
-  console.log(user);
+  const user = JSON.parse(localStorage.getItem('userInfo'));
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const desc = useRef();
   const [file, setFile] = useState(null);
@@ -35,7 +35,7 @@ export default function Share() {
       } catch (err) {}
     }
     try {
-      await axios.post("/api/post", newPost);
+      await axios.post("/api/posts", newPost);
       window.location.reload();
     } catch (err) {}
   };
