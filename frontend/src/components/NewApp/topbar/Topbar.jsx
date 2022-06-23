@@ -6,7 +6,8 @@ import { AuthContext } from '../../../Context/AuthContext';
 import { ChatState } from '../../../Context/ChatProvider';
 
 export default function Topbar() {
-  const { user } = ChatState();
+  const { user } = useContext(AuthContext);
+  console.log(user);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   return (
     <div className="topbarContainer">

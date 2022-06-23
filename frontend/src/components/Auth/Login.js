@@ -2,11 +2,13 @@ import { Button } from '@chakra-ui/button';
 import { FormControl, FormLabel } from '@chakra-ui/form-control';
 import { Input, InputGroup, InputRightElement } from '@chakra-ui/input';
 import { VStack } from '@chakra-ui/layout';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import axios from 'axios';
 import { useToast } from '@chakra-ui/react';
 import { useHistory } from 'react-router-dom';
 import { API_CONFIGS } from '../../config/constants';
+import { AuthContext } from '../../Context/AuthContext';
+import { loginCall } from '../../apiCalls';
 
 const Login = () => {
   const [show, setShow] = useState(false);
@@ -15,6 +17,8 @@ const Login = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [loading, setLoading] = useState(false);
+
+  const { isFetching, dispatch } = useContext(AuthContext);
 
   const history = useHistory();
 
@@ -55,6 +59,9 @@ const Login = () => {
         position: 'bottom',
       });
       localStorage.setItem('userInfo', JSON.stringify(data));
+
+      loginCall({ email: email, password: password }, dispatch);
+
       setLoading(false);
       history.push('/home');
       history.go(0);
