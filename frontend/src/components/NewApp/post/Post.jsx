@@ -26,7 +26,10 @@ export default function Post({ post }) {
         },
       };
 
-      const res = await axios.get(`/api/user/specific?userId=${post.userId}`, config);
+      const res = await axios.get(
+        `/api/user/specific?userId=${post.userId}`,
+        config
+      );
       setUser(res.data);
     };
     fetchUser();
@@ -66,7 +69,7 @@ export default function Post({ post }) {
         </div>
         <div className="postCenter">
           <span className="postText">{post?.desc}</span>
-          <img className="postImg" src={PF + post.img} alt="" />
+          <img className="postImg" src={post.img} alt="" />
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
