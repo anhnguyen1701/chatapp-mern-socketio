@@ -11,6 +11,7 @@ import { ChatState } from '../../../Context/ChatProvider';
 export default function Rightbar({ user }) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [friends, setFriends] = useState([]);
+  const [userList, setUserList] = useState([]);
   const { user: currentUser, dispatch } = useContext(AuthContext);
   const [followed, setFollowed] = useState(
     currentUser.followings.includes(user?.id)
@@ -25,6 +26,16 @@ export default function Rightbar({ user }) {
         console.log(err);
       }
     };
+
+    const getUserList = async () => {
+      try {
+        const userList = await axios.get('api/user/getall');
+        setUserList(userList.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getUserList();
     getFriends();
   }, [user]);
 
@@ -55,9 +66,9 @@ export default function Rightbar({ user }) {
           </span>
         </div>
         <img className="rightbarAd" src="assets/ad.png" alt="" /> */}
-        <h4 className="rightbarTitle">Online Friends</h4>
+        <h4 className="rightbarTitle">All Users</h4>
         <ul className="rightbarFriendList">
-          {Users.map((u) => (
+          {userList.map((u) => (
             <Online key={u.id} user={u} />
           ))}
         </ul>

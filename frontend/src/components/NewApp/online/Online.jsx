@@ -1,15 +1,20 @@
-import "./online.css";
+import { Link } from 'react-router-dom';
+import './online.css';
 
-export default function Online({user}) {
+export default function Online({ user }) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   return (
-    <li className="rightbarFriend">
-      <div className="rightbarProfileImgContainer">
-        <img className="rightbarProfileImg" src={PF+user.profilePicture} alt="" />
-        <span className="rightbarOnline"></span>
-      </div>
-      <span className="rightbarUsername">{user.username}</span>
-    </li>
+    <Link to={'/profile/' + user.username}>
+      <li className="rightbarFriend">
+        <div className="rightbarProfileImgContainer">
+          <img className="rightbarProfileImg" src={user.pic} alt="" />
+          {/* <span className="rightbarOnline"></span> */}
+        </div>
+        <span className="rightbarUsername">
+          {user.username ? user.username : user.name}
+        </span>
+      </li>
+    </Link>
   );
 }
