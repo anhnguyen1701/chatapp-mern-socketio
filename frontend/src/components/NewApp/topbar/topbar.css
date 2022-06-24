@@ -64,6 +64,7 @@
 
 .topbarIcons {
   display: flex;
+  margin-left: 125px;
 }
 
 .topbarIconItem {
