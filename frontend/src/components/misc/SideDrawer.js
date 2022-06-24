@@ -22,7 +22,7 @@ import React, { useState } from 'react';
 import { BellIcon, ChevronDownIcon } from '@chakra-ui/icons';
 import { ChatState } from '../../Context/ChatProvider';
 import ProfileModal from './ProfileModal';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useDisclosure } from '@chakra-ui/hooks';
 import axios from 'axios';
 import ChatLoading from '../ChatLoading';
