@@ -27,7 +27,6 @@ export default function Post({ post }) {
       };
 
       const res = await axios.get(`/api/user/specific?userId=${post.userId}`, config);
-      console.log(res);
       setUser(res.data);
     };
     fetchUser();
