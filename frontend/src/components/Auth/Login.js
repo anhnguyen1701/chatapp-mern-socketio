@@ -60,6 +60,8 @@ const Login = () => {
       });
       localStorage.setItem('userInfo', JSON.stringify(data));
 
+      localStorage.setItem('user', JSON.stringify(data));
+
       loginCall({ email: email, password: password }, dispatch);
 
       setLoading(false);
