@@ -6,6 +6,15 @@ import { format } from 'timeago.js';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthContext';
 import { ChatState } from '../../../Context/ChatProvider';
+import {
+  IconButton,
+  Menu,
+  MenuItem,
+  MenuList,
+  MenuButton,
+  useToast,
+} from '@chakra-ui/react';
+import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
 
 export default function Post({ post }) {
   const [like, setLike] = useState(post.likes.length);
@@ -13,6 +22,7 @@ export default function Post({ post }) {
   const [user, setUser] = useState({});
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const currentUser = JSON.parse(localStorage.getItem('userInfo'));
+  const toast = useToast();
 
   useEffect(() => {
     setIsLiked(post.likes.includes(currentUser._id));
@@ -44,6 +54,28 @@ export default function Post({ post }) {
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
   };
+
+  const deletePost = async () => {
+    try {
+      await axios.delete('/api/posts/' + post._id, {
+        data: { userId: currentUser._id },
+      });
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+      toast({
+        title: 'error occured',
+        description: 'you can only delete your posts',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+        position: 'bottom',
+      });
+    }
+  };
+
+  const editPost = () => {};
+
   return (
     <div className="post">
       <div className="postWrapper">
@@ -63,9 +95,22 @@ export default function Post({ post }) {
             <span className="postUsername">{user.username}</span>
             <span className="postDate">{format(post.createdAt)}</span>
           </div>
-          <div className="postTopRight">
-            <MoreVert />
-          </div>
+          <Menu className="postTopRight">
+            <MenuButton
+              as={IconButton}
+              aria-label="Options"
+              icon={<MoreVert />}
+              variant="outline"
+            />
+            <MenuList>
+              <MenuItem icon={<EditIcon />} onClick={editPost}>
+                Edit post
+              </MenuItem>
+              <MenuItem icon={<DeleteIcon />} onClick={deletePost}>
+                Delete post
+              </MenuItem>
+            </MenuList>
+          </Menu>
         </div>
         <div className="postCenter">
           <span className="postText">{post?.desc}</span>
