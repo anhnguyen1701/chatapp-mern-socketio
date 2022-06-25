@@ -17,7 +17,8 @@ import axios from 'axios';
 import ScrollableChat from './ScrollableChat';
 import io from 'socket.io-client';
 
-const ENDPOINT = 'https://aqueous-eyrie-15707.herokuapp.com';
+// const ENDPOINT = 'https://aqueous-eyrie-15707.herokuapp.com';
+const ENDPOINT = 'http://localhost:5000';
 let socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
