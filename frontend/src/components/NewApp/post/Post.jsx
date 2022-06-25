@@ -15,6 +15,7 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
+import EditModal from './EditModal';
 
 export default function Post({ post }) {
   const [like, setLike] = useState(post.likes.length);
@@ -103,9 +104,9 @@ export default function Post({ post }) {
               variant="outline"
             />
             <MenuList>
-              <MenuItem icon={<EditIcon />} onClick={editPost}>
-                Edit post
-              </MenuItem>
+              <EditModal post={post}>
+                <MenuItem icon={<EditIcon />}>Edit post</MenuItem>
+              </EditModal>
               <MenuItem icon={<DeleteIcon />} onClick={deletePost}>
                 Delete post
               </MenuItem>
