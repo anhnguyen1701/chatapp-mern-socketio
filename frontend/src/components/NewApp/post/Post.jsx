@@ -77,6 +77,11 @@ export default function Post({ post }) {
 
   const editPost = () => {};
 
+  const compare2user = (currentUser, postUser) => {
+    if (currentUser == postUser) return true;
+    else return false;
+  };
+
   return (
     <div className="post">
       <div className="postWrapper">
@@ -96,22 +101,27 @@ export default function Post({ post }) {
             <span className="postUsername">{user.username}</span>
             <span className="postDate">{format(post.createdAt)}</span>
           </div>
-          <Menu className="postTopRight">
-            <MenuButton
-              as={IconButton}
-              aria-label="Options"
-              icon={<MoreVert />}
-              variant="outline"
-            />
-            <MenuList>
-              <EditModal post={post}>
-                <MenuItem icon={<EditIcon />}>Edit post</MenuItem>
-              </EditModal>
-              <MenuItem icon={<DeleteIcon />} onClick={deletePost}>
-                Delete post
-              </MenuItem>
-            </MenuList>
-          </Menu>
+          {compare2user(currentUser._id, post.userId) ? (
+            <Menu className="postTopRight">
+              <MenuButton
+                as={IconButton}
+                aria-label="Options"
+                icon={<MoreVert />}
+                variant="outline"
+              />
+              <MenuList>
+                <EditModal post={post}>
+                  <MenuItem icon={<EditIcon />}>Edit post</MenuItem>
+                </EditModal>
+
+                <MenuItem icon={<DeleteIcon />} onClick={deletePost}>
+                  Delete post
+                </MenuItem>
+              </MenuList>
+            </Menu>
+          ) : (
+            <></>
+          )}
         </div>
         <div className="postCenter">
           <span className="postText">{post?.desc}</span>
