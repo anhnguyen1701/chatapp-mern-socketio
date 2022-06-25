@@ -54,7 +54,6 @@ router.get('/specific', async (req, res) => {
   const userId = req.query.userId;
   const username = req.query.username;
 
-  console.log(userId, username);
   try {
     const user = userId
       ? await User.findById(userId)
@@ -62,7 +61,6 @@ router.get('/specific', async (req, res) => {
     const { password, updatedAt, ...other } = user._doc;
     res.status(200).json(other);
   } catch (err) {
-    console.log(err);
     res.status(500).json(err);
   }
 });
@@ -132,7 +130,6 @@ router.put('/:id/unfollow', async (req, res) => {
 //get all user
 router.get('/getall', async (req, res) => {
   const users = await User.find();
-  console.log(users);
   res.send(users);
 });
 

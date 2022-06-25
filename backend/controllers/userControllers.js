@@ -19,8 +19,6 @@ const registerUser = asyncHandler(async (req, res) => {
 
   const username = email.split('@')[0];
 
-  console.log(username);
-
   const user = await User.create({
     name,
     email,
