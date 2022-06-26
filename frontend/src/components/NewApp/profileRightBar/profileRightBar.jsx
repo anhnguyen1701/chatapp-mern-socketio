@@ -1,25 +1,19 @@
-import './rightbar.css';
-import { Users } from '../../../dummyData';
-import Online from '../online/Online';
-import { useContext, useEffect, useState } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import { AuthContext } from '../../../Context/AuthContext';
 import { Add, Remove } from '@material-ui/icons';
-import { ChatState } from '../../../Context/ChatProvider';
+import axios from 'axios';
+import React, { useRef } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { Link, useParams, useRouteMatch } from 'react-router-dom';
+import { AuthContext } from '../../../Context/AuthContext';
 
-export default function Rightbar({ user }) {
+export default function ProfileRightBar({ user }) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [friends, setFriends] = useState([]);
-  const [userList, setUserList] = useState([]);
-  const { user: currentUser, dispatch } = useContext(AuthContext);
-  const [followed, setFollowed] = useState(
-    currentUser.followings.includes(user?.id)
-  );
+  const { user: currentUser } = useContext(AuthContext);
+  const [followed, setFollowed] = useState('');
 
   useEffect(() => {
     console.log('chek');
-    setFollowed(currentUser.followings.includes(user?._id));
+    setFollowed(currentUser.followings.includes(user._id));
   }, [user]);
 
   useEffect(() => {
@@ -31,16 +25,6 @@ export default function Rightbar({ user }) {
         console.log(err);
       }
     };
-
-    const getUserList = async () => {
-      try {
-        const userList = await axios.get('api/user/getall');
-        setUserList(userList.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getUserList();
     getFriends();
   }, [user]);
 
@@ -59,26 +43,6 @@ export default function Rightbar({ user }) {
       }
       setFollowed(!followed);
     } catch (err) {}
-  };
-
-  const HomeRightbar = () => {
-    return (
-      <>
-        {/* <div className="birthdayContainer">
-          <img className="birthdayImg" src="assets/gift.png" alt="" />
-          <span className="birthdayText">
-            <b>Pola Foster</b> and <b>3 other friends</b> have a birhday today.
-          </span>
-        </div>
-        <img className="rightbarAd" src="assets/ad.png" alt="" /> */}
-        <h4 className="rightbarTitle">All Users</h4>
-        <ul className="rightbarFriendList">
-          {userList.map((u) => (
-            <Online key={u.id} user={u} />
-          ))}
-        </ul>
-      </>
-    );
   };
 
   const ProfileRightbar = () => {
@@ -115,10 +79,11 @@ export default function Rightbar({ user }) {
       </>
     );
   };
+
   return (
     <div className="rightbar">
       <div className="rightbarWrapper">
-        {user ? <ProfileRightbar /> : <HomeRightbar />}
+        {user ? <ProfileRightbar /> : <></>}
       </div>
     </div>
   );
