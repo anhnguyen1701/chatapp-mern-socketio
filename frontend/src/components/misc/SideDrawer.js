@@ -135,7 +135,7 @@ const SideDrawer = () => {
         <div>
           <Menu>
             <MenuButton p={1}>
-              <BellIcon fontSize="2xl" m={1}></BellIcon>
+              {/* <BellIcon fontSize="2xl" m={1}></BellIcon> */}
             </MenuButton>
             {/* <MenuList></MenuList> */}
           </Menu>
