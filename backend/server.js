@@ -24,7 +24,7 @@ app.use('/api/posts', postRoutes);
 const __dirname1 = path.resolve();
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname1, '/frontend/build')));
-  
+
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname1, 'frontend', 'build', 'index.html'));
   });
@@ -42,6 +42,18 @@ app.use(errorHandler);
 const PORT = process.env.PORT || 5000;
 
 const server = app.listen(PORT, console.log(`Server start on port ${PORT}`));
+
+// ----------socket.io service --------
+let users = [];
+
+const addUser = (user1, socketId) => {
+  !users.some((user) => user._id === user1._id) &&
+    users.push({ user1, socketId });
+};
+
+const removeUser = (socketId) => {
+  users = users.filter((user) => user.socketId !== socketId);
+};
 
 const io = require('socket.io')(server, {
   pingTimeout: 60000,
@@ -72,8 +84,27 @@ io.on('connection', (socket) => {
     });
   });
 
-  socket.off('setup', () => {
+  //get userId and socketId from user
+  socket.on('addUser', (user) => {
+    addUser(user, socket.id);
+    console.log(socket.id);
+    io.emit('getUsers', users);
+  });
+
+  //when disconnect
+  socket.on("disconnect", () => {
     console.log('user disconnected');
+    removeUser(socket.id);
+    io.emit('getUsers', users);
+    console.log(socket.id);
     socket.leave(userData._id);
   });
+
+  // socket.off('setup', () => {
+  //   console.log('user disconnected');
+  //   removeUser(socket.id);
+  //   io.emit('getUsers', users);
+  //   console.log(socket.id);
+  //   socket.leave(userData._id);
+  // });
 });

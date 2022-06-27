@@ -23,8 +23,16 @@ export default function UserOnline() {
 
   const [loading, setLoading] = useState(false);
   const [loadingChat, setLoadingChat] = useState();
-  const { user, setSelectedChat, chats, setChats } = ChatState();
+  const {
+    user,
+    setSelectedChat,
+    chats,
+    setChats,
+    onlineUsers,
+    setOnlineUsers,
+  } = ChatState();
 
+  console.log(onlineUsers, '------');
 
   const accessChat = async (userId) => {
     try {
@@ -87,11 +95,13 @@ export default function UserOnline() {
         borderRadius="lg"
         overflowY="hidden"
       >
-        <UserListItem
-          key={user1._id}
-          user={user1}
-          handleFunction={() => accessChat(user1._id)}
-        />
+        {onlineUsers?.map((user) => (
+          <UserListItem
+            key={user.user1._id}
+            user={user.user1}
+            handleFunction={() => accessChat(user.user1._id)}
+          />
+        ))}
       </Box>
     </Box>
   );

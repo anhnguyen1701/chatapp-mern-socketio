@@ -7,6 +7,7 @@ const ChatProvider = ({ children }) => {
   const [user, setUser] = useState();
   const [selectedChat, setSelectedChat] = useState();
   const [chats, setChats] = useState([]);
+  const [onlineUsers, setOnlineUsers] = useState([]);
 
   const history = useHistory();
 
@@ -27,6 +28,8 @@ const ChatProvider = ({ children }) => {
         setSelectedChat,
         chats,
         setChats,
+        onlineUsers,
+        setOnlineUsers,
       }}
     >
       {children}
