@@ -97,14 +97,11 @@ io.on('connection', (socket) => {
     removeUser(socket.id);
     io.emit('getUsers', users);
     console.log(socket.id);
-    socket.leave(userData._id);
+    // socket.leave(userData._id);
   });
 
-  // socket.off('setup', () => {
-  //   console.log('user disconnected');
-  //   removeUser(socket.id);
-  //   io.emit('getUsers', users);
-  //   console.log(socket.id);
-  //   socket.leave(userData._id);
-  // });
+  socket.off('setup', () => {
+    console.log('user disconnected');
+    socket.leave(userData._id);
+  });
 });
