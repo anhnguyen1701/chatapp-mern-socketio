@@ -5,6 +5,7 @@ import { Box } from '@chakra-ui/react';
 import SideDrawer from '../components/misc/SideDrawer';
 import MyChats from '../components/MyChats';
 import ChatBox from '../components/ChatBox';
+import UserOnline from '../components/UserOnline';
 
 const Chatpage = () => {
   const { user } = ChatState();
@@ -18,6 +19,7 @@ const Chatpage = () => {
         {user && (
           <ChatBox fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />
         )}
+        <UserOnline></UserOnline>
       </Box>
     </div>
   );
