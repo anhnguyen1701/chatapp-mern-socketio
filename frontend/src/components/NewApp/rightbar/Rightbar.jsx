@@ -99,11 +99,7 @@ export default function Rightbar({ user }) {
             >
               <div className="rightbarFollowing">
                 <img
-                  src={
-                    friend.profilePicture
-                      ? PF + friend.profilePicture
-                      : PF + 'person/noAvatar.png'
-                  }
+                  src={friend.pic ? friend.pic : PF + 'person/noAvatar.png'}
                   alt=""
                   className="rightbarFollowingImg"
                 />
